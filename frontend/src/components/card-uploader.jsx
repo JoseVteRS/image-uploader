@@ -1,6 +1,5 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import ImageIcon from './icons/image-icon';
-import Button from './ui/Button';
 import ButtonUploader from './ui/button-uploader';
 import Card from './ui/card';
 import CardTitle from './ui/card-title';
@@ -13,7 +12,6 @@ const CardUploader = () => {
 
 		inputFileRef.current.files = event.dataTransfer.files;
 		console.log({ files: event.dataTransfer.files });
-		// btnSubmitRef.current.click();
 	};
 	const handleOnDragoverEvent = event => event.preventDefault();
 
