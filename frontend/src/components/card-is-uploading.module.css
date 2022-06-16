@@ -1,0 +1,25 @@
+.bar {
+	animation: processing 1.5s ease-out alternate infinite;
+	animation-timing-function: ease-in-out;
+	-webkit-animation-timing-function: ease-in-out;
+	position: absolute;
+	border-radius: 90px;
+	height: 0.5rem;
+	top: 0;
+	left: 10%;
+	right: 0;
+	bottom: 0;
+	width: 10%;
+}
+
+@keyframes processing {
+	to {
+		left: 0%;
+		width: 30%;
+	}
+
+	from {
+		left: 70%;
+		width: 30%;
+	}
+}
