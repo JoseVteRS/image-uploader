@@ -1,4 +1,3 @@
-import React from 'react';
 import Card from './ui/card';
 import CardTitle from './ui/card-title';
 import style from './card-is-uploading.module.css';
