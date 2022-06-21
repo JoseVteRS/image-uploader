@@ -17,7 +17,7 @@ const CardImageResume = () => {
 			</div>
 			<div className='border-2 border-gray-300 bg-gray-100 w-full rounded-xl p-1 my-8 flex items-center justify-between'>
 				<div className='w-8/12 overflow-hidden'>
-					<p className='truncate mx-3 text-gray-800 font-semibold'>
+					<p className='truncate mx-3 text-gray-700'>
 						https://www.imageuploader.com/photo-from-pexels-jose-vte-ripoll.jpg
 					</p>
 				</div>

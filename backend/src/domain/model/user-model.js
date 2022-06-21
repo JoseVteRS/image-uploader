@@ -1,13 +1,13 @@
 
 import { hash } from 'bcrypt';
-import { test as uuidTest } from 'uuid-random';
-import { InvalidEmailFormatException } from '../errors/invalid-email-format.exception';
-import { InvalidIdFormatException } from '../errors/invalid-id-format.exception';
-import { InvalidNameFormatException } from '../errors/invalid-name-format.exception';
-import { InvalidPasswordFormatException } from '../errors/invalid-password-format.exception';
+import uuid from 'uuid-random';
+import { InvalidEmailFormatException } from '../errors/invalid-email-format.exception.js';
+import { InvalidIdFormatException } from '../errors/invalid-id-format.exception.js';
+import { InvalidNameFormatException } from '../errors/invalid-name-format.exception.js';
+import { InvalidPasswordFormatException } from '../errors/invalid-password-format.exception.js';
 
 
-HASH_SALT = 10;
+const HASH_SALT = 10;
 
 
 export class UserModel {
@@ -24,7 +24,7 @@ export class UserModel {
 
 
     static validateId(id) {
-        return uuidTest(id);
+        return uuid.test(id);
     }
 
     static validateName(name) {

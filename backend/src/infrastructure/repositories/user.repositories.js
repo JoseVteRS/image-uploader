@@ -1,5 +1,5 @@
-import { UserModel } from "../../domain/model/user-model";
-import { UserSchema } from "../schemas/user.schema";
+import { UserModel } from "../../domain/model/user-model.js";
+import { UserSchema } from "../schemas/user.schema.js";
 
 
 
@@ -40,11 +40,10 @@ export class UserRepository {
     static async findById(id) {
         const userFound = await UserSchema.findById(id).exec();
 
-        if (!userFound) {
-            throw new UserNotFoundException();
-        }
+        if (!userFound) return null;
 
         return UserRepository.toDomain(userFound);
+
     }
 
     /**
@@ -55,9 +54,7 @@ export class UserRepository {
     static async findByEmail(email) {
         const userFound = await UserSchema.findOne({ email }).exec();
 
-        if (!userFound) {
-            throw new UserNotFoundException();
-        }
+        if (!userFound) return null;
 
         return UserRepository.toDomain(userFound);
     }
@@ -68,7 +65,7 @@ export class UserRepository {
     static async create(domainUser) {
         const persistanceUser = UserRepository.toPersistance(domainUser);
 
-        const user = await UserSchema.create(persistanceUser);
+        const user = new UserSchema(persistanceUser);
 
         await user.save();
     }

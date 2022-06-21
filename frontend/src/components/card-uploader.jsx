@@ -27,9 +27,9 @@ const CardUploader = () => {
 			<div
 				onDrop={handleOnDropEvent}
 				onDragOver={handleOnDragoverEvent}
-				className='border-2 rounded-2xl p-10 border-dashed border-sky-700 h-50 text-center bg-sky-100'
+				className='border-2 rounded-2xl p-10 border-dashed border-sky-700 h-50 text-center bg-sky-100 flex flex-col items-center justify-center'
 			>
-				<ImageIcon className='fill-sky-900 opacity-70' />
+				<ImageIcon className='fill-sky-900 opacity-70 h-52 w-52' />
 				<p className='text-gray-400'>Drag and Drop your image here</p>
 			</div>
 

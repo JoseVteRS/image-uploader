@@ -1,8 +1,8 @@
-import { model, Schema } from "mongoose";
+import mongoose from "mongoose";
 
 
 
-const schema = new Schema({
+const schema = new mongoose.Schema({
     _id: { type: String, _id: false },
     email: { type: String, required: true, unique: true, index: true },
     name: { type: String, required: true },
@@ -11,4 +11,4 @@ const schema = new Schema({
     images: [{ type: [String], required: false }],
 });
 
-export const UserSchema = model("User", schema);
+export const UserSchema = mongoose.model("User", schema);

@@ -1,1 +1,3 @@
-console.log('Image Uploader Running');
+import { bootstrap } from './bootstrap.js';
+
+bootstrap();
