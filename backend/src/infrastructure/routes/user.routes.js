@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { userRegisterController } from '../controllers/user.controller.js';
-
+import container from '../../container.js';
 
 const router = Router();
 
-router.post('/register', userRegisterController);
+const userRegisterController = container.resolve('userRegisterController')
+
+router.post('/register', userRegisterController.execute.bind(userRegisterController));
 
 export const userRoutes = router;
