@@ -1,4 +1,5 @@
-
+import { InvalidLoginException } from "../errors/invalid-login.exception";
+import bcrypt from 'bcryptjs';
 
 export class UserLoginUseCase {
     constructor({userRepository}){
@@ -9,7 +10,16 @@ export class UserLoginUseCase {
         // Comprobar si existe el usuario por email
         const existingUser = await this.userRepository.findByEmail(email);
         if(!existingUser) {
-          
+          throw new InvalidLoginException();
         }
+
+        // Comprobar si la password coincide 
+        const didpasswordMatch = await bcrypt.compare(password, existingUser.password);
+        if(!didpasswordMatch) {
+            throw new InvalidLoginException();
+        }
+
+        // Devolver el ID del usuario existente
+        return existingUser.id;
     }
 }
