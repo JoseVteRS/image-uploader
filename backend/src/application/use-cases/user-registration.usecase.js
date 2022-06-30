@@ -1,4 +1,4 @@
-import { UserModel } from "../../domain/model/user-model.js"
+import { UserModel } from "../../domain/model/user-model.js";
 import { UserRepository } from "../../infrastructure/repositories/user.repositories.js";
 import { UserEmailAlreadyInUseException } from '../errors/user-email-already-in-use.exception.js';
 import { UserIdAlreadyInUseException } from '../errors/user-id-already in-use.exception.js';

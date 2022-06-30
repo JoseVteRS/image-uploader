@@ -10,6 +10,8 @@ services:
       MONGODB_ROOT_PASSWORD: ${MONGODB_PASSWORD:-admin}
       MONGODB_REPLICA_SET_KEY: replicasetkey123
       MONGODB_REPLICA_SET_NAME: uploader
+      MONGODB_USER: root
+      MONGODB_PASSWORD: admin
     ports:
       - ${MONGODB_PORT:-27017}:27017
     volumes:
@@ -55,8 +57,8 @@ services:
   #     - postgresql
   #   volumes:
   #     - pgadmin_data:/var/lib/pgadmin
-
+    
 volumes:
   # postgresql_data:
-  mongodb_data:
+  mongodb_data: 
   # pgadmin_data:
