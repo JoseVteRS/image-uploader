@@ -1,5 +1,6 @@
 
 import { MissingFieldsFormatException } from "../errors/missing-fields.exception.js";
+import { UnnecesaryFieldsFormatException } from "../errors/unnecesary-fields.exception.js";
 
 export class UserRegisterController {
     constructor({ userRegisterUseCase }) {
@@ -13,14 +14,14 @@ export class UserRegisterController {
             if(!id || !name || !email || !password) 
                 throw new MissingFieldsFormatException();
 
-            if(Object.keys(res).length !== 0)
+            if(Object.keys(rest).length !== 0)
                 throw new UnnecesaryFieldsFormatException();
             
             await this.userRegisterUseCase.execute(id, name, email, password);
             res.status(201).send();
 
         } catch (error) {
-            next(err);
+            next(error);
         }
     }
 }

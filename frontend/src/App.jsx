@@ -1,25 +1,12 @@
-import { useState } from 'react';
-import CardImageResume from './components/card-image-resume';
-import CardIsUploading from './components/card-is-uploading';
 import CardUploader from './components/card-uploader';
 import MainLayout from './components/layouts/main-layout';
+import Navbar from './components/navbar';
 
 function App() {
 	return (
 		<MainLayout>
+			<Navbar />
 			<CardUploader />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<CardIsUploading />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<CardImageResume />
 		</MainLayout>
 	);
 }

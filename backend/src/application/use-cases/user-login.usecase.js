@@ -1,4 +1,4 @@
-import { InvalidLoginException } from "../errors/invalid-login.exception";
+import { InvalidLoginException } from "../errors/invalid-login.exception.js";
 import bcrypt from 'bcryptjs';
 
 export class UserLoginUseCase {
