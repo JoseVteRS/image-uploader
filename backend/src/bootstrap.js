@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
+import upload from 'express-fileupload';
 import { config as dotenvConfig } from 'dotenv';
 import mongoose from 'mongoose';
 import { errorMiddleware } from './infrastructure/middlewares/error.middleware.js';
@@ -19,9 +20,11 @@ const limiter = rateLimit({
 export const bootstrap = async () => {
     const app = express();
     app.disable('x-powered-by');
-    
+
     app.use(express.json());
     app.use(cors());
+
+    app.use(upload());
 
     if (process.env.NODE_ENV === 'production') app.use(limiter);
 

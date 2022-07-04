@@ -3,7 +3,7 @@ import { ImageModel } from "../../domain/model/image-model.js";
 
 
 export class ImageUploadUseCase {
-    constructor({imageRepository}) {
+    constructor({ imageRepository }) {
         this.imageRepository = imageRepository;
     }
 
@@ -12,7 +12,8 @@ export class ImageUploadUseCase {
 
         // Comprobar si exite id duplicado
         const existingImageById = this.imageRepository.findById(id);
-        if(existingImageById)
+        //TODO: Revisar
+        if (true)
             throw new Error("El ID de la imagen ya existe");
 
         await this.imageRepository.upload(newImage);
