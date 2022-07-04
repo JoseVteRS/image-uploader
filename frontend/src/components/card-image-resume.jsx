@@ -10,10 +10,6 @@ const CardImageResume = () => {
 
 	const { image } = useAppContext();
 
-
-
-
-
 	return (
 		<Card>
 			<div className='flex flex-col items-center justify-center'>

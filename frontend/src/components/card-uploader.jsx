@@ -52,7 +52,7 @@ const CardUploader = () => {
 	}, []);
 
 	return (
-		<>
+		<section>
 			<Card>
 				<div className='text-center'>
 					<CardTitle>Upload your image</CardTitle>
@@ -110,7 +110,7 @@ const CardUploader = () => {
 				</div>
 			</Card>
 			<LastImage imageFromLocalUrl={imageFromLocal} />
-		</>
+		</section>
 	);
 };
 

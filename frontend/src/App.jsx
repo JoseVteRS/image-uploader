@@ -6,12 +6,9 @@ import { AppProvider, useAppContext } from './components/providers/AppProvider';
 import LandingPage from './Landing';
 
 function App() {
-	
 	return (
 		<AppProvider>
-			<MainLayout>
-				<LandingPage />
-			</MainLayout>
+			<LandingPage />
 		</AppProvider>
 	);
 }
