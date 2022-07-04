@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import CheckIcon from './icons/check-icon';
 import { useAppContext } from './providers/AppProvider';
 import Button from './ui/Button';
@@ -6,7 +7,12 @@ import Card from './ui/card';
 import CardTitle from './ui/card-title';
 
 const CardImageResume = () => {
+
 	const { image } = useAppContext();
+
+
+
+
 
 	return (
 		<Card>
@@ -26,6 +32,8 @@ const CardImageResume = () => {
 					Copy link
 				</Button>
 			</div>
+
+
 		</Card>
 	);
 };

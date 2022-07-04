@@ -33,6 +33,9 @@ const AppProvider = ({ children }) => {
 			const imageData = await image.json();
 
 			dispatch({ type: SUBMIT_IMAGE_SUCCESS, payload: { src: imageData.src } });
+
+			localStorage.setItem('images', JSON.stringify(imageData.src));
+
 		} catch (error) {
 			dispatch({ type: SUBMIT_IMAGE_ERROR, payload: { msg: error.message } });
 		}
