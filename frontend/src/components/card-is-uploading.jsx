@@ -1,8 +1,10 @@
 import Card from './ui/card';
 import CardTitle from './ui/card-title';
 import style from './card-is-uploading.module.css';
+import { useAppContext } from './providers/AppProvider';
 
 const CardIsUploading = () => {
+
 	return (
 		<Card>
 			<CardTitle>Uploading...</CardTitle>

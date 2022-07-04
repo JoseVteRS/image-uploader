@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useContext, useReducer } from 'react';
 import {
 	SUBMIT_IMAGE_BEGIN,
 	SUBMIT_IMAGE_ERROR,
@@ -23,14 +23,16 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: SUBMIT_IMAGE_BEGIN });
 		const formData = new FormData();
 		formData.append('id', crypto.randomUUID());
-		formData.append('image', imageFile);
+		formData.append('file', imageFile);
 
 		try {
 			const image = await fetch('http://localhost:3001/image-upload', {
 				method: 'POST',
 				body: formData
 			});
-			dispatch({ type: SUBMIT_IMAGE_SUCCESS, payload: { src: image.src } });
+			const imageData = await image.json();
+
+			dispatch({ type: SUBMIT_IMAGE_SUCCESS, payload: { src: imageData.src } });
 		} catch (error) {
 			dispatch({ type: SUBMIT_IMAGE_ERROR, payload: { msg: error.message } });
 		}

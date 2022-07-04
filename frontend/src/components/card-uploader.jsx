@@ -1,47 +1,46 @@
 import { useRef, useState } from 'react';
 import ImageIcon from './icons/image-icon';
+import { useAppContext } from './providers/AppProvider';
 import Button from './ui/Button';
 import Card from './ui/card';
 import CardTitle from './ui/card-title';
 
 const CardUploader = () => {
 	const inputFileRef = useRef();
-	const [image, setImage] = useState({ preview: '', data: '' });
+	const [dragActive, setDragActive] = useState(false);
+	const { handleFile } = useAppContext();
 
-	const handleDragOver = event => event.preventDefault();
-	const handleOnDragoverEvent = async event => {
-		event.preventDefault();
-		inputFileRef.current.files = event.dataTransfer.files;
+	const handleDrag = function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		if (e.type === 'dragenter' || e.type === 'dragover') {
+			setDragActive(true);
+		} else if (e.type === 'dragleave') {
+			setDragActive(false);
+		}
+	};
+	const handleChange = async e => {
+		e.preventDefault();
 
-		let formData = new FormData();
-		formData.append('file', inputFileRef.current.files[0]);
-		formData.append('id', crypto.randomUUID());
-		await fetch('http://localhost:3001/image-upload', {
-			method: 'POST',
-			body: formData
-		});
-
-		// TODO: Cambiar vista card-uploading.tsx
+		if (e.target.files && e.target.files[0]) {
+			handleFile(e.target.files[0]);
+		}
 	};
 
-	const handleSubmit = async event => {
-		event.preventDefault();
-		let formData = new FormData();
-		formData.append('file', image.data);
-		formData.append('id', crypto.randomUUID());
-		await fetch('http://localhost:3001/image-upload', {
-			method: 'POST',
-			body: formData
-		});
+	const handleDrop = async function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		setDragActive(false);
+
+		if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+			handleFile(e.dataTransfer.files[0]);
+		}
 	};
 
-	const handleFileChange = e => {
-		const img = {
-			preview: URL.createObjectURL(e.target.files[0]),
-			data: e.target.files[0]
-		};
-		setImage(img);
+	const onButtonClick = () => {
+		inputFileRef.current.click();
 	};
+
 	return (
 		<Card>
 			<div className='text-center'>
@@ -51,42 +50,52 @@ const CardUploader = () => {
 				</p>
 			</div>
 
-			<div
-				onDrop={handleOnDragoverEvent}
-				onDragOver={event => handleDragOver(event)}
-				className='border-2 rounded-2xl p-10 border-dashed border-sky-700 h-50 text-center bg-sky-100 flex flex-col items-center justify-center'
-			>
-				{image.preview ? (
-					<img className='rounded mb-4' src={image.preview} />
-				) : (
-					<ImageIcon className='fill-sky-900 opacity-70 h-52 w-52' />
-				)}
-
-				<p className='text-gray-400'>Drag and Drop your image here</p>
-			</div>
-
-			<p className='my-8 text-center text-gray-400'>or</p>
+			{dragActive && (
+				<div
+					className='w-full h-full absolute top-0 bottom-0 left-0 right-0'
+					onDragEnter={handleDrag}
+					onDragLeave={handleDrag}
+					onDragOver={handleDrag}
+					onDrop={handleDrop}
+				></div>
+			)}
 
 			<div className='text-center'>
-				<form onSubmit={handleSubmit}>
-					{image.data ? (
-						<Button type='submit'>Upload</Button>
-					) : (
-						<Button type='button'>
-							<label>
-								<input
-									ref={inputFileRef}
-									type='file'
-									accept="image/png, image/jpeg, image/jpg"
-									name='file'
-									onChange={handleFileChange}
-									className='hidden'
-								></input>
-								Select image
-							</label>
-						</Button>
+				<form
+					className='relative border-2 border-dashed border-sky-500 p-5 rounded-xl'
+					onDragEnter={handleDrag}
+					onSubmit={e => e.preventDefault()}
+				>
+					<input
+						className='hidden'
+						type='file'
+						name="file"
+						accept='image/*'
+						ref={inputFileRef}
+						onChange={handleChange}
+					/>
+					<div className='img-container'>
+						<ImageIcon className='opacity-50' />
+					</div>
+					<div>
+						<p className='font-lg text-slate-600 mb-5'>
+							Drag & Drop your image here
+						</p>
+					</div>
+					{dragActive && (
+						<div
+							className='absolute w-full h-full top-0 bottom-0 left-0 right-0 '
+							onDragEnter={handleDrag}
+							onDragLeave={handleDrag}
+							onDragOver={handleDrag}
+							onDrop={handleDrop}
+						></div>
 					)}
 				</form>
+				<p className='my-8 text-center text-gray-400'>or</p>
+				<Button type='button' onClick={onButtonClick}>
+					Choose a file
+				</Button>
 			</div>
 		</Card>
 	);
