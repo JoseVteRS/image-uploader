@@ -6,10 +6,7 @@ import Card from './ui/card';
 import CardTitle from './ui/card-title';
 
 const CardImageResume = () => {
-
-	const {image} = useAppContext();
-
-	
+	const { image } = useAppContext();
 
 	return (
 		<Card>
@@ -23,9 +20,7 @@ const CardImageResume = () => {
 			</div>
 			<div className='border-2 border-gray-300 bg-gray-100 w-full rounded-xl p-1 my-8 flex items-center justify-between'>
 				<div className='w-8/12 overflow-hidden'>
-					<p className='truncate mx-3 text-gray-700'>
-						https://www.imageuploader.com/photo-from-pexels-asdf.jpg
-					</p>
+					<p className='truncate mx-3 text-gray-700'>{image}</p>
 				</div>
 				<Button className='w-4/12' onClick={() => console.log('Copy Link')}>
 					Copy link

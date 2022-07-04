@@ -20,7 +20,7 @@ const limiter = rateLimit({
 export const bootstrap = async () => {
     const app = express();
     app.disable('x-powered-by');
-
+    app.use('/uploads', express.static('uploads'));
     app.use(express.json());
     app.use(cors());
 
