@@ -10,7 +10,7 @@ export class ImageModel {
      * @param {Number} width Image width in pixels
      * @param {Date} createdAt Image creation date
      */
-    constructor(id, title, src, format, size, height, width, createdAt) {
+    constructor(id, title, src, format, size, height, width) {
         this.id = id;
         this.title = title;
         this.src = src;
@@ -18,6 +18,9 @@ export class ImageModel {
         this.size = size;
         this.height = height;
         this.width = width;
-        this.createdAt = createdAt;
+    }
+
+    static async upload(id, title, src, format, size, height, width) {
+        return new ImageModel(id, title, src, format, size, height, width);
     }
 }

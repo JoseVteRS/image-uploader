@@ -8,15 +8,20 @@ export class ImageUploadUseCase {
     }
 
     async execute(id, title, src, format, size, height, width, createdAt) {
-        const newImage = await ImageModel.upload(id, title, src, format, size, height, width, createdAt);
+        const newImage = await ImageModel.upload(
+            id,
+            title,
+            src,
+            format,
+            size,
+            height,
+            width
+        );
 
         // Comprobar si exite id duplicado
-        const existingImageById = this.imageRepository.findById(id);
-        //TODO: Revisar
-        if (true)
-            throw new Error("El ID de la imagen ya existe");
+        // const existingImageById = this.imageRepository.findById(id);
 
+        // Persistir el nuevo usuario
         await this.imageRepository.upload(newImage);
-
     }
 }

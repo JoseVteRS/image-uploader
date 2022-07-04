@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import Button from '../ui/Button';
 import Card from "../ui/card";
 
 const UserRegisterForm = () => {
@@ -24,7 +25,7 @@ const UserRegisterForm = () => {
 					<input
 						type='text'
 						name='name'
-						className='rounded mb-2'
+						className='rounded mb-2 w-full border p-2'
 						placeholder='Name'
 						onChange={ev => onHandleName(ev.target.value)}
 					/>
@@ -33,8 +34,8 @@ const UserRegisterForm = () => {
 					<input
 						type='text'
 						name='email'
-						className='rounded mb-2'
-						placeholder='email'
+						className='rounded mb-2 w-full border p-2'
+						placeholder='Email'
 						onChange={ev => onHandleEmail(ev.target.value)}
 					/>
 				</div>
@@ -42,14 +43,15 @@ const UserRegisterForm = () => {
 					<input
 						type='text'
 						name='password'
-						className='rounded mb-2'
+						className='rounded mb-2 w-full border p-2'
 						placeholder='password'
 						onChange={ev => onHandlePassword(ev.target.value)}
 					/>
 				</div>
-				<button type='submit' onClick={() => console.log({ userData })}>
-					Guardar
-				</button>
+
+				<Button type="submit">
+					Register user
+				</Button>
 			</form>
 		</Card>
 	);
@@ -69,7 +71,7 @@ const handleSubmit = async (event, name, email, password) => {
 			password
 		})
 	});
-console.log(resp)
+
 };
 
 export default UserRegisterForm;
