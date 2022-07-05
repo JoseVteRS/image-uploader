@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useContext, useReducer } from 'react';
 import {
+	GET_IMAGES_FROM_LOCALSTORAGE,
 	SUBMIT_IMAGE_BEGIN,
 	SUBMIT_IMAGE_ERROR,
 	SUBMIT_IMAGE_SUCCESS
@@ -11,6 +12,7 @@ import reducer from '../../lib/contexts/reducer';
 const initialState = {
 	isLoading: false,
 	image: {},
+	images:[],
 	isDragActive: null,
 	showAlert: false,
 	alertType: '',
@@ -26,6 +28,13 @@ const AppProvider = ({ children }) => {
 		if (imagesFromLocalstorage) setImages(JSON.parse(imagesFromLocalstorage));
 	}, []);
 
+	useEffect(()=> {
+		dispatch({
+			type: GET_IMAGES_FROM_LOCALSTORAGE,
+			payload:  JSON.parse(localStorage.getItem('images'))
+		});
+	}, [])
+
 	const handleFile = async imageFile => {
 		dispatch({ type: SUBMIT_IMAGE_BEGIN });
 		const formData = new FormData();
@@ -39,7 +48,7 @@ const AppProvider = ({ children }) => {
 			});
 			const imageData = await imageFetch.json();
 
-			dispatch({ type: SUBMIT_IMAGE_SUCCESS, payload: { image: imageData } });
+			dispatch({ type: SUBMIT_IMAGE_SUCCESS, payload: { image: imageData  } });
 			setImages(images.push(imageData));
 			localStorage.setItem('images', JSON.stringify(images));
 		} catch (error) {

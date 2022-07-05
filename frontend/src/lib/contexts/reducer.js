@@ -1,4 +1,5 @@
 import {
+	GET_IMAGES_FROM_LOCALSTORAGE,
 	SUBMIT_IMAGE_BEGIN,
 	SUBMIT_IMAGE_ERROR,
 	SUBMIT_IMAGE_SUCCESS
@@ -16,16 +17,22 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				isLoading: false,
-				image: action.payload
+				image: action.payload,
+				images: state.images.push(action.payload)
 			};
 
 		case SUBMIT_IMAGE_ERROR:
 			return { ...state, isLoading: false };
 
+		case GET_IMAGES_FROM_LOCALSTORAGE:
+			return {
+				...state,
+				images: action.payload
+			};
+
 		default:
 			throw new Error(`No such action: ${action.type}`);
 	}
 };
-
 
 export default reducer;

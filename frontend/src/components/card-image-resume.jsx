@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRef } from 'react';
-import { useEffect } from 'react';
 import CardImageInfo from './card-image-info';
 import CheckIcon from './icons/check-icon';
 import { useAppContext } from './providers/AppProvider';
@@ -12,6 +11,8 @@ const CardImageResume = () => {
 	const {
 		image: { image }
 	} = useAppContext();
+
+	// TODO: Hook?
 	const [isCopied, setIsCopied] = useState(false);
 	const buttonCopyRef = useRef(null);
 
@@ -21,7 +22,7 @@ const CardImageResume = () => {
 	};
 
 	return (
-		<section className='flex justify-center'>
+		<section className='md:flex md:justify-center'>
 			<Card>
 				<div className='flex flex-col items-center justify-center'>
 					<CheckIcon className='fill-green-600 h-10 w-10' />
@@ -29,7 +30,11 @@ const CardImageResume = () => {
 				</div>
 
 				<div className='rounded-2xl overflow-hidden'>
-					<img src={image.src || '/image.jpg'} alt='Image uploaded' />
+					<img
+						onError={() => console.log('Image no encontrada')}
+						src={image.src || '/image.jpg'}
+						alt='Image uploaded'
+					/>
 				</div>
 				<CardImageInfo image={image} />
 				<div className='border-2 border-gray-300 bg-gray-100 w-full rounded-xl p-1 my-8 flex items-center justify-between'>
