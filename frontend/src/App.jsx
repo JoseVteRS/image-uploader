@@ -9,6 +9,7 @@ import LandingPage from './Landing';
 function App() {
 	return (
 		<AppProvider>
+			<Navbar />
 			<MainLayout>
 				<LandingPage />
 			</MainLayout>

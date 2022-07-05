@@ -19,41 +19,50 @@ const UserRegisterForm = () => {
 	};
 
 	return (
-		<Card>
-			<form onSubmit={event => handleSubmit(event, name, email, password)}>
-				<div>
-					<input
-						type='text'
-						name='name'
-						className='rounded mb-2 w-full border p-2'
-						placeholder='Name'
-						onChange={ev => onHandleName(ev.target.value)}
-					/>
-				</div>
-				<div>
-					<input
-						type='text'
-						name='email'
-						className='rounded mb-2 w-full border p-2'
-						placeholder='Email'
-						onChange={ev => onHandleEmail(ev.target.value)}
-					/>
-				</div>
-				<div>
-					<input
-						type='text'
-						name='password'
-						className='rounded mb-2 w-full border p-2'
-						placeholder='password'
-						onChange={ev => onHandlePassword(ev.target.value)}
-					/>
-				</div>
+		<section className='fixed  my-3 top-15 left-5 z-50 w-11/12'>
+			<Card>
+				<form onSubmit={event => handleSubmit(event, name, email, password)}>
+					<div className='mb-3'>
+						<label>
+							<p>Name</p>
+							<input
+								type='text'
+								name='name'
+								className='rounded mb-2 w-full border p-2'
+								placeholder='John Doe'
+								onChange={ev => onHandleName(ev.target.value)}
+							/>
+						</label>
+					</div>
+					<div className='mb-3'>
+						<label>
+							<p>Email</p>
+							<input
+								type='text'
+								name='email'
+								className='rounded mb-2 w-full border p-2'
+								placeholder='john@doe.com'
+								onChange={ev => onHandleEmail(ev.target.value)}
+							/>
+						</label>
+					</div>
+					<div className='mb-3'>
+						<label>
+							<p>Password</p>
+							<input
+								type='text'
+								name='password'
+								className='rounded mb-2 w-full border p-2'
+								placeholder='************'
+								onChange={ev => onHandlePassword(ev.target.value)}
+							/>
+						</label>
+					</div>
 
-				<Button type="submit">
-					Register user
-				</Button>
-			</form>
-		</Card>
+					<Button type='submit'>Register user</Button>
+				</form>
+			</Card>
+		</section>
 	);
 };
 
