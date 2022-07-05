@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useContext, useReducer } from 'react';
 import {
 	SUBMIT_IMAGE_BEGIN,
@@ -9,7 +10,7 @@ import reducer from '../../lib/contexts/reducer';
 
 const initialState = {
 	isLoading: false,
-	image: '',
+	image: {},
 	isDragActive: null,
 	showAlert: false,
 	alertType: '',
@@ -18,6 +19,12 @@ const initialState = {
 
 const AppProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
+	const [images, setImages] = useState([]);
+
+	useEffect(() => {
+		const imagesFromLocalstorage = localStorage.getItem('images');
+		if (imagesFromLocalstorage) setImages(JSON.parse(imagesFromLocalstorage));
+	}, []);
 
 	const handleFile = async imageFile => {
 		dispatch({ type: SUBMIT_IMAGE_BEGIN });
@@ -26,16 +33,15 @@ const AppProvider = ({ children }) => {
 		formData.append('file', imageFile);
 
 		try {
-			const image = await fetch('http://localhost:3001/image-upload', {
+			const imageFetch = await fetch('http://localhost:3001/image-upload', {
 				method: 'POST',
 				body: formData
 			});
-			const imageData = await image.json();
+			const imageData = await imageFetch.json();
 
-			dispatch({ type: SUBMIT_IMAGE_SUCCESS, payload: { src: imageData.src } });
-
-			localStorage.setItem('images', JSON.stringify(imageData.src));
-
+			dispatch({ type: SUBMIT_IMAGE_SUCCESS, payload: { image: imageData } });
+			setImages(images.push(imageData));
+			localStorage.setItem('images', JSON.stringify(images));
 		} catch (error) {
 			dispatch({ type: SUBMIT_IMAGE_ERROR, payload: { msg: error.message } });
 		}

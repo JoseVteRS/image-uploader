@@ -16,7 +16,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				isLoading: false,
-				image: action.payload.src
+				image: action.payload
 			};
 
 		case SUBMIT_IMAGE_ERROR:
