@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useUploadImage } from '../lib/hooks/useUploadImage';
 import CardImagesList from './card-images-list';
 import ImageHome from './icons/image-home';
-import LastImage from './last-image';
 import { useAppContext } from './providers/AppProvider';
 import Button from './ui/Button';
 import Card from './ui/card';
@@ -10,38 +10,8 @@ import Notice from './ui/notice';
 
 const CardUploader = () => {
 	const inputFileRef = useRef();
-	const [dragActive, setDragActive] = useState(false);
-	const { handleFile, images } = useAppContext();
-
-	const handleDrag = function (e) {
-		e.preventDefault();
-		e.stopPropagation();
-		if (e.type === 'dragenter' || e.type === 'dragover') {
-			setDragActive(true);
-		} else if (e.type === 'dragleave') {
-			setDragActive(false);
-		}
-	};
-	const handleChange = async e => {
-		e.preventDefault();
-
-		if (e.target.files && e.target.files[0]) {
-			handleFile(e.target.files[0]);
-		}
-	};
-	const handleDrop = async function (e) {
-		e.preventDefault();
-		e.stopPropagation();
-		setDragActive(false);
-
-		if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-			handleFile(e.dataTransfer.files[0]);
-		}
-	};
-	const onButtonClick = () => {
-		inputFileRef.current.click();
-	};
-
+	const { images } = useAppContext();
+	const { dragActive, handleDrag, handleDrop, handleChange, onButtonClick } = useUploadImage();
 
 	return (
 		<>
