@@ -17,8 +17,6 @@ export class ImageUploadController {
             const extension = filename.split('.')[1];
             const id = req.body.id;
 
-            console.log(file);
-
             file.mv(`./uploads/${id}.${extension}`, (err) => {
                 if (err) res.send(err);
                 sizeOf(
