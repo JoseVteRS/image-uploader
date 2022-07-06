@@ -22,7 +22,7 @@ const CardImagesList = () => {
 					{images.length != 0 &&
 						images.map(image => {
 							return (
-								<div className=' border-b-2 py-10 border-gray-50'>
+								<div key={image.src} className=' border-b-2 py-10 border-gray-50'>
 									<div>
 										<div className='w-12/12'>
 											<img src={image.src} className='w-full rounded-md' />

@@ -50,6 +50,11 @@ const CardUploader = () => {
 				title='🚧 Warning!'
 				text='All images could be public at the moment. That could to change in the future'
 			/>
+			<Notice
+				kind='info'
+				title='🆕 Regiser new user'
+				text='In this moment you can sign up, and your user will be saved in the database, but you can do nothing as registered user. The signin option is disabled until further notice'
+			/>
 			<section className='md:flex gap-5 justify-center'>
 				<Card>
 					<div className='text-center'>

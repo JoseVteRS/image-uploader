@@ -4,10 +4,10 @@ import LinkedinIcon from '../icons/linkedin-icon';
 
 const Footer = () => {
 	return (
-		<footer className='bg-slate-800 p-3  sticky bottom-0 w-full text-xs'>
+		<footer className='bg-slate-800 p-3  w-full text-xs'>
 			<div className='text-slate-200 container mx-auto text-center'>
 				<p className='mb-2'>
-					This project has been created for improve my knowlegments. Its a
+					This project has been created to improve my knowlegments. Its a
 					challenges from{' '}
 					<a
 						href='https://devchallenges.io/'
